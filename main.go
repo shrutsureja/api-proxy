@@ -53,5 +53,9 @@ func main() {
 	}
 	slog.Info("Starting proxy server", "port", port)
 	http.HandleFunc("/", handler)
+	http.HandleFunc("/live", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+		w.Write([]byte("OK"))
+	})
 	http.ListenAndServe(":"+port, nil)
 }
